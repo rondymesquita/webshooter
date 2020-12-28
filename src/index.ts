@@ -1,17 +1,18 @@
 import puppeteer from 'puppeteer'
-import Screenshooter from './screenshooter'
-import PDFCapturer from './pdf-capturer'
+import Screenshooter from './snapshot/snapshooter'
+import PDFSnapshooter from './snapshot/pdf-snapshooter'
+import Snapshooter from './snapshot/snapshooter'
 
-import { ScreenshotOptions } from './types'
+import { ShotOptions } from './types'
 
 ;(async () => {
-  const pdfCapturer = new PDFCapturer()
-  const screenshooter = new Screenshooter(pdfCapturer)
+  const pdfCapturer = new PDFSnapshooter()
+  const screenshooter = new Snapshooter(pdfCapturer)
   await screenshooter.init()
 
-  const params: ScreenshotOptions = {
+  const params: ShotOptions = {
       url: 'https://github.com/rondymesquita'
   }
-  await screenshooter.screenshot(params)
+  await screenshooter.shot(params)
   await screenshooter.close()
 })()

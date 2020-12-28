@@ -1,10 +1,10 @@
 import { Browser } from 'puppeteer'
 
-export type ScreenshotOptions = {
+export type ShotOptions = {
     url: string
 }
 
-export type CaptureOptions = {
+export type SnapshooterOptions = {
     browser: Browser,
     url: string,
     name: string
