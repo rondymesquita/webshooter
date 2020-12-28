@@ -1,7 +1,8 @@
 import { Browser } from 'puppeteer'
 
 export type ShotOptions = {
-    url: string
+    url: string,
+    name: string
 }
 
 export type SnapshooterOptions = {

@@ -22,7 +22,7 @@ export default class Snapshooter {
     const options: SnapshooterOptions = {
       browser: this.browser,
       url: screenshotOptions.url,
-      name: 'example'
+      name: screenshotOptions.name
     }
     await this.snapshooter.shot(options)
     logger.log('Snapshot completed!')

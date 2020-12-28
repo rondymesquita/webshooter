@@ -11,10 +11,10 @@ export default class Logger {
     return Logger.instance;
   }
 
-  log(argument: string){
+  log(message?: any, ...optionalParams: any[]){
     if (!this.isEnable) {
         return
     }
-    console.log('>>>', argument)
+    console.log(message, ...optionalParams)
   }
 }
