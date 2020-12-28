@@ -1,5 +1,3 @@
-import puppeteer from 'puppeteer'
-import Screenshooter from './snapshot/snapshooter'
 import PDFSnapshooter, {
   PDFSnapshooterOptions,
 } from './snapshot/pdf-snapshooter'
@@ -14,13 +12,13 @@ import { ShotOptions } from './types'
   }
 
   const pdfCapturer = new PDFSnapshooter(DEFAULT_OPTIONS)
-  const screenshooter = new Snapshooter(pdfCapturer)
-  await screenshooter.init()
+  const snapshooter = new Snapshooter(pdfCapturer)
+  await snapshooter.init()
 
   const params: ShotOptions = {
     url: 'https://github.com/rondymesquita',
     name: 'example.portrait'
   }
-  await screenshooter.shot(params)
-  await screenshooter.close()
+  await snapshooter.shot(params)
+  await snapshooter.close()
 })()
