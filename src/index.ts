@@ -1,18 +1,18 @@
-import PDFSnapshooter, {
+import PDFScreenshooter, {
   PDFSnapshooterOptions,
-} from './snapshot/pdf-snapshooter'
-import Snapshooter from './snapshot/snapshooter'
+} from './screenshot/pdf-screenshooter'
+import ScreenshooterContext from './screenshot/screenshooter-context'
 import { PaperSize } from './papersize/papersize'
 
-import { ShotOptions } from './types'
+import { ShotOptions } from './screenshot/types'
 ;(async () => {
   const DEFAULT_OPTIONS: PDFSnapshooterOptions = {
     landscape: false,
     paperSize: PaperSize.A4,
   }
 
-  const pdfCapturer = new PDFSnapshooter(DEFAULT_OPTIONS)
-  const snapshooter = new Snapshooter(pdfCapturer)
+  const pdfCapturer = new PDFScreenshooter(DEFAULT_OPTIONS)
+  const snapshooter = new ScreenshooterContext(pdfCapturer)
   await snapshooter.init()
 
   const params: ShotOptions = {

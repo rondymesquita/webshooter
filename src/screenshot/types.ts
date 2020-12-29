@@ -5,7 +5,7 @@ export type ShotOptions = {
     name: string
 }
 
-export type SnapshooterOptions = {
+export type ScreenshooterOptions = {
     browser: Browser,
     url: string,
     name: string

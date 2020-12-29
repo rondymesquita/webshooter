@@ -1,6 +1,6 @@
-import Snapshooter from './isnapshooter'
+import Screenshooter from './screenshooter'
 import { Page, PDFOptions } from 'puppeteer'
-import { SnapshooterOptions } from '../types'
+import { ScreenshooterOptions } from './types'
 import { PaperSize } from '../papersize/papersize'
 import Logger from '../log'
 
@@ -16,11 +16,11 @@ const DEFAULT_OPTIONS: PDFSnapshooterOptions = {
   paperSize: PaperSize.A4
 }
 
-export default class PDFSnapshooter implements Snapshooter {
+export default class PDFScreenshooter implements Screenshooter {
 
   constructor(private options: PDFSnapshooterOptions = DEFAULT_OPTIONS){}
 
-  async shot(captureOptions: SnapshooterOptions): Promise<any> {
+  async shot(captureOptions: ScreenshooterOptions): Promise<any> {
     const { browser, url, name } = captureOptions
     const { landscape, paperSize } = this.options
 

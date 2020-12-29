@@ -1,13 +1,13 @@
-import ISnapshooter from './isnapshooter'
+import Screenshooter from './screenshooter'
 import puppeteer, { Browser } from 'puppeteer'
-import { ShotOptions, SnapshooterOptions } from '../types'
+import { ShotOptions, ScreenshooterOptions } from './types'
 import Logger from '../log'
 
 const logger: Logger = Logger.getInstance()
 
-export default class Snapshooter {
+export default class ScreenshooterContext {
   private browser: Browser
-  constructor(private snapshooter: ISnapshooter) {
+  constructor(private snapshooter: Screenshooter) {
   }
 
   async init() {
@@ -19,7 +19,7 @@ export default class Snapshooter {
   }
 
   async shot(screenshotOptions: ShotOptions) {
-    const options: SnapshooterOptions = {
+    const options: ScreenshooterOptions = {
       browser: this.browser,
       url: screenshotOptions.url,
       name: screenshotOptions.name
