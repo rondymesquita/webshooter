@@ -1,12 +1,12 @@
 import { Browser } from 'puppeteer'
 
-export type ShotOptions = {
-    url: string,
-    name: string
+export interface ShotOptions {
+  browser: Browser
+  url: string
+  name: string
 }
 
-export type ScreenshooterOptions = {
-    browser: Browser,
-    url: string,
-    name: string
+export interface ShotContextOptions {
+  url: string
+  name: string
 }

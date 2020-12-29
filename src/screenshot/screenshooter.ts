@@ -1,5 +1,5 @@
-import { ScreenshooterOptions } from './types'
+import { ShotOptions } from './types'
 
 export default interface Screenshooter {
-    shot(captureOptions: ScreenshooterOptions): Promise<any>
+    shot(captureOptions: ShotOptions): Promise<any>
 }

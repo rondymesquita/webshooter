@@ -1,26 +1,26 @@
 import Screenshooter from './screenshooter'
 import { Page, PDFOptions } from 'puppeteer'
-import { ScreenshooterOptions } from './types'
+import { ShotOptions } from './types'
 import { PaperSize } from '../papersize/papersize'
 import Logger from '../log'
 
 const logger: Logger = Logger.getInstance()
 
-export type PDFSnapshooterOptions = {
+export type PDFScreenshooterOptions = {
   landscape: boolean,
   paperSize: PaperSize
 }
 
-const DEFAULT_OPTIONS: PDFSnapshooterOptions = {
+const DEFAULT_OPTIONS: PDFScreenshooterOptions = {
   landscape: false,
   paperSize: PaperSize.A4
 }
 
 export default class PDFScreenshooter implements Screenshooter {
 
-  constructor(private options: PDFSnapshooterOptions = DEFAULT_OPTIONS){}
+  constructor(private options: PDFScreenshooterOptions = DEFAULT_OPTIONS){}
 
-  async shot(captureOptions: ScreenshooterOptions): Promise<any> {
+  async shot(captureOptions: ShotOptions): Promise<any> {
     const { browser, url, name } = captureOptions
     const { landscape, paperSize } = this.options
 
@@ -37,6 +37,6 @@ export default class PDFScreenshooter implements Screenshooter {
     logger.log('Snapshoting with params %o', params)
 
     await page.pdf(params)
-    logger.log('PDF Snapshot completed!')
+    logger.log('PDF snapshot completed!')
   }
 }

@@ -1,23 +1,33 @@
 import PDFScreenshooter, {
-  PDFSnapshooterOptions,
+  PDFScreenshooterOptions,
 } from './screenshot/pdf-screenshooter'
+import PNGScreenshooter, {
+  PNGScreenshooterOptions,
+  PNGScreenshooterMode
+} from './screenshot/png-screenshooter'
 import ScreenshooterContext from './screenshot/screenshooter-context'
 import { PaperSize } from './papersize/papersize'
 
-import { ShotOptions } from './screenshot/types'
+import { ShotContextOptions } from './screenshot/types'
 ;(async () => {
-  const DEFAULT_OPTIONS: PDFSnapshooterOptions = {
+  const pdfOptions: PDFScreenshooterOptions = {
     landscape: false,
     paperSize: PaperSize.A4,
   }
 
-  const pdfCapturer = new PDFScreenshooter(DEFAULT_OPTIONS)
-  const snapshooter = new ScreenshooterContext(pdfCapturer)
+  const pngOptions: PNGScreenshooterOptions = {
+    mode: PNGScreenshooterMode.FullSplitPage
+  }
+
+  //   const pdfScreenshooter = new PDFScreenshooter(pdfOptions)
+  const pngScreenshooter = new PNGScreenshooter(pngOptions)
+  const snapshooter = new ScreenshooterContext(pngScreenshooter)
   await snapshooter.init()
 
-  const params: ShotOptions = {
-    url: 'https://github.com/rondymesquita',
-    name: 'example.portrait'
+  const params: ShotContextOptions = {
+    // url: 'https://github.com/rondymesquita',
+    url: 'https://pt.wikipedia.org/wiki/Lorem_ipsum',
+    name: 'example.split',
   }
   await snapshooter.shot(params)
   await snapshooter.close()

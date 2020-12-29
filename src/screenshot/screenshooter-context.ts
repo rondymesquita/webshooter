@@ -1,6 +1,6 @@
 import Screenshooter from './screenshooter'
 import puppeteer, { Browser } from 'puppeteer'
-import { ShotOptions, ScreenshooterOptions } from './types'
+import { ShotContextOptions, ShotOptions } from './types'
 import Logger from '../log'
 
 const logger: Logger = Logger.getInstance()
@@ -11,19 +11,22 @@ export default class ScreenshooterContext {
   }
 
   async init() {
-    this.browser = await puppeteer.launch({})
+    this.browser = await puppeteer.launch({headless: false})
   }
 
   async close() {
     await this.browser.close();
   }
 
-  async shot(screenshotOptions: ShotOptions) {
-    const options: ScreenshooterOptions = {
+  async shot(shotContextOptions: ShotContextOptions) {
+    const { url, name } = shotContextOptions
+
+    const options: ShotOptions = {
       browser: this.browser,
-      url: screenshotOptions.url,
-      name: screenshotOptions.name
+      url,
+      name
     }
+
     await this.snapshooter.shot(options)
     logger.log('Snapshot completed!')
   }
