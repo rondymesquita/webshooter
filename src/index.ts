@@ -38,14 +38,19 @@ import yargs from 'yargs/yargs'
 
 interface Arguments{
   format: string
+  name: string
 }
 
 const args:Arguments = yargs(process.argv.slice(2))
   .option('format', {
-    alias: 'f',
     type: 'string',
     default: 'PDF',
     choices: ['PDF', 'PNG'],
+    description: ''
+  })
+  .option('name', {
+    type: 'string',
+    default: 'example',
     description: ''
   })
   .argv
@@ -75,7 +80,7 @@ class Webshooter {
 
     const params: ShotContextOptions = {
       url: 'https://pt.wikipedia.org/wiki/Lorem_ipsum',
-      name: 'example',
+      name: args.name,
     }
 
     await screenshooterContext.shot(params)
