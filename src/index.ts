@@ -42,6 +42,11 @@ interface Arguments{
 }
 
 const args:Arguments = yargs(process.argv.slice(2))
+  .option('url', {
+    type: 'string',
+    demandOption: true,
+    description: ''
+  })
   .option('format', {
     type: 'string',
     default: 'PDF',
@@ -51,6 +56,23 @@ const args:Arguments = yargs(process.argv.slice(2))
   .option('name', {
     type: 'string',
     default: 'example',
+    description: ''
+  })
+  .option('png-mode', {
+    type: 'string',
+    default: 'FullPage',
+    choices: ['FullPage', 'Visible', 'FullSplitPage'],
+    description: ''
+  })
+  .option('pdf-papersize', {
+    type: 'string',
+    default: 'A4',
+    description: ''
+  })
+  .option('pdf-orientation', {
+    type: 'string',
+    default: 'Portrait',
+    choices: ['Portrait', 'Landscape'],
     description: ''
   })
   .argv
@@ -90,8 +112,8 @@ class Webshooter {
 
 }
 
-const webshooter = new Webshooter(args)
-webshooter.shot()
+// const webshooter = new Webshooter(args)
+// webshooter.shot()
 
 // console.log('>>>args', args);
 
