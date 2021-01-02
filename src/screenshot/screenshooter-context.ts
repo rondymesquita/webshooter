@@ -11,7 +11,7 @@ export default class ScreenshooterContext {
   }
 
   async init() {
-    this.browser = await puppeteer.launch({headless: false})
+    this.browser = await puppeteer.launch({headless: true})
   }
 
   async close() {
