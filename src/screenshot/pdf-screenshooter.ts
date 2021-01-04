@@ -6,7 +6,7 @@ import Logger from '../log'
 
 const logger: Logger = Logger.getInstance()
 
-export type PDFScreenshooterOptions = {
+export interface PDFScreenshooterOptions {
   landscape: boolean,
   paperSize: PaperSize
 }

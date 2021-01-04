@@ -20,18 +20,18 @@ export default class ArgParser {
         default: 'example',
         description: '',
       })
-      .option('png-mode', {
+      .option('pngMode', {
         type: 'string',
         default: 'FullPage',
         choices: ['FullPage', 'Visible', 'FullSplitPage'],
         description: '',
       })
-      .option('pdf-papersize', {
+      .option('pdfPapersize', {
         type: 'string',
         default: 'A4',
         description: '',
       })
-      .option('pdf-orientation', {
+      .option('pdfOrientation', {
         type: 'string',
         default: 'Portrait',
         choices: ['Portrait', 'Landscape'],

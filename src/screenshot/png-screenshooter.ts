@@ -11,7 +11,7 @@ export enum PNGScreenshooterMode {
   FullSplitPage
 }
 
-export type PNGScreenshooterOptions = {
+export interface PNGScreenshooterOptions {
   mode: PNGScreenshooterMode,
 }
 
@@ -22,6 +22,58 @@ const DEFAULT_OPTIONS: PNGScreenshooterOptions = {
 export default class PNGScreenshooter implements Screenshooter {
   constructor(private options: PNGScreenshooterOptions = DEFAULT_OPTIONS){}
 
+  private async takeShotVisibleArea(page: Page, path: string): Promise<any>{
+    const params: BinaryScreenShotOptions = {
+      path,
+      type: 'png',
+      fullPage: false,
+    }
+    await this.takeShotWithParams(page, params)
+  }
+
+  private async takeShotEntirePage(page: Page, path: string): Promise<any>{
+    const params: BinaryScreenShotOptions = {
+      path,
+      type: 'png',
+      fullPage: true,
+    }
+    await this.takeShotWithParams(page, params)
+  }
+
+  private async takeShotWithParams(page: Page, params: BinaryScreenShotOptions):Promise<any>{
+    await page.screenshot(params)
+  }
+
+  private async takeShotFullSplitPage(page: Page, name: string) {
+    const innerHeight = await page.evaluate(() => {
+      return window.innerHeight
+    });
+    // console.log('innerHeight', innerHeight);
+
+    const windowHeight = await page.evaluate(() => {
+      return document.body.scrollHeight
+    });
+    // console.log('windowHeight', windowHeight);
+
+    let heightOffset = 0
+    let screenshotNumber = 0
+    while(heightOffset < windowHeight) {
+      const params: BinaryScreenShotOptions = {
+        path: `${name}-${screenshotNumber}.png`,
+        type: 'png',
+        fullPage: false,
+      }
+      await this.takeShotWithParams(page, params)
+
+      heightOffset += innerHeight
+      screenshotNumber += 1
+
+      await page.evaluate((_heightOffset) => {
+        return window.scrollTo(0, _heightOffset)
+      }, heightOffset);
+    }
+  }
+
   async shot(captureOptions: ShotOptions): Promise<any> {
     const { browser, url, name } = captureOptions
     const { mode } = this.options
@@ -31,52 +83,12 @@ export default class PNGScreenshooter implements Screenshooter {
     await page.goto(url)
     const path = `${name}.png`
 
-
-    // const screenshotModes = {}
-    let fullPage = true
     if (mode === PNGScreenshooterMode.FullPage) {
-      const params: BinaryScreenShotOptions = {
-        path,
-        type: 'png',
-        fullPage: true,
-      }
-      await page.screenshot(params)
+      await this.takeShotEntirePage(page, path)
     } else if (mode === PNGScreenshooterMode.Visible) {
-      const params: BinaryScreenShotOptions = {
-        path,
-        type: 'png',
-        fullPage: false,
-      }
-      await page.screenshot(params)
+      await this.takeShotVisibleArea(page, path)
     } else {
-      const innerHeight = await page.evaluate(() => {
-        return window.innerHeight
-      });
-      console.log('innerHeight', innerHeight);
-
-      const windowHeight = await page.evaluate(() => {
-        return document.body.scrollHeight
-      });
-      console.log('windowHeight', windowHeight);
-
-      let heightOffset = 0
-      let screenshotNumber = 0
-      while(heightOffset < windowHeight) {
-        const params: BinaryScreenShotOptions = {
-          path: `${name}-${screenshotNumber}.png`,
-          type: 'png',
-          fullPage: false,
-        }
-        await page.screenshot(params)
-
-        heightOffset += innerHeight
-        screenshotNumber += 1
-
-        await page.evaluate((_heightOffset) => {
-          return window.scrollTo(0, _heightOffset)
-        }, heightOffset);
-      }
-
+      await this.takeShotFullSplitPage(page, name)
     }
 
     // logger.log('Snapshoting with params %o', params)

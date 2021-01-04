@@ -10,7 +10,7 @@ export default class Webshooter {
   }
 
   async shot(){
-    const screenshooter = ScreenshooterFactory.create(this.args.format)
+    const screenshooter = ScreenshooterFactory.create(this.args)
     const screenshooterContext = new ScreenshooterContext(screenshooter)
     await screenshooterContext.init()
 

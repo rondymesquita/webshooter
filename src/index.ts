@@ -6,7 +6,7 @@ import Webshooter from './webShooter'
 
 
 const args:Arguments = ArgParser.parse(process.argv.slice(2))
-console.log('>>>args', args);
+console.log('Args', args);
 
-// const webshooter = new Webshooter(args)
-// webshooter.shot()
+const webshooter = new Webshooter(args)
+webshooter.shot()
