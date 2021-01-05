@@ -1,8 +1,8 @@
 {
-  "name": "web-snapshooter",
-  "version": "1.0.0",
+  "name": "webshooter",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "bin": {
     "webshooter": "./dist/index.js"
   },
@@ -11,6 +11,9 @@
     "dev": "nodemon -w ./src ./src/index.ts",
     "build": "tsc"
   },
+  "files": [
+    "dist/**/*"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
