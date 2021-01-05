@@ -5,13 +5,13 @@
 
 ## Quick Start
 
-### Install (Coming soon)
+### Install (Coming soon, for now, you need to download and build by yourself)
 
 `npm install -g webshooter`
 
 ### Take PNG screenshot
 
-```
+```bash
 webshooter --format PNG --url https://pt.wikipedia.org/wiki/Lorem_ipsum
 
 # With custom name
@@ -29,7 +29,7 @@ webshooter --format PNG --url https://pt.wikipedia.org/wiki/Lorem_ipsum --name l
 
 ### Take PDF screenshot
 
-```
+```bash
 webshooter --format PDF --url https://pt.wikipedia.org/wiki/Lorem_ipsum --name lorem-ipsum
 
 # With custom paper size (More paper sizes coming soon)
