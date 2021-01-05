@@ -5,7 +5,7 @@
 
 ## Quick Start
 
-### Install (Coming soon, for now, you need to download and build by yourself)
+### Install
 
 `npm install -g webshooter`
 
