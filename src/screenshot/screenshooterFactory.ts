@@ -1,27 +1,28 @@
-import PDFScreenshooter, {
-  PDFScreenshooterOptions,
-} from './pdf-screenshooter'
+import PDFScreenshooter, { PDFScreenshooterOptions } from './pdf-screenshooter'
 import PNGScreenshooter, {
   PNGScreenshooterOptions,
-  PNGScreenshooterMode
+  PNGScreenshooterMode,
 } from './png-screenshooter'
-
+import { PaperSize } from '../papersize/papersize'
+import { Orientation } from '../papersize/orientation'
 import { Arguments } from '../args/types'
 
-export default class ScreenshooterFactory{
-  static create(args: Arguments){
-    const { format } = args
+export default class ScreenshooterFactory {
+  static create(args: Arguments) {
+    const { format, pngMode, pdfPapersize, pdfOrientation } = args
     let screenshooter
-    if (format==='PNG'){
-      const { pngMode } = args
-
+    if (format === 'PNG') {
       const options: PNGScreenshooterOptions = {
-        mode: PNGScreenshooterMode[pngMode as keyof typeof PNGScreenshooterMode]
+        mode: pngMode as PNGScreenshooterMode,
       }
 
       screenshooter = new PNGScreenshooter(options)
     } else {
-      screenshooter = new PDFScreenshooter()
+      const options: PDFScreenshooterOptions = {
+        orientation: pdfOrientation as Orientation,
+        paperSize: pdfPapersize as PaperSize,
+      }
+      screenshooter = new PDFScreenshooter(options)
     }
     return screenshooter
   }

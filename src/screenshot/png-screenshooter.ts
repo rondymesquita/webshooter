@@ -6,23 +6,23 @@ import Logger from '../log'
 const logger: Logger = Logger.getInstance()
 
 export enum PNGScreenshooterMode {
-  FullPage,
-  Visible,
-  FullSplitPage
+  FullPage = 'FullPage',
+  Visible = 'Visible',
+  FullSplitPage = 'FullSplitPage',
 }
 
 export interface PNGScreenshooterOptions {
-  mode: PNGScreenshooterMode,
+  mode: PNGScreenshooterMode
 }
 
 const DEFAULT_OPTIONS: PNGScreenshooterOptions = {
-  mode: PNGScreenshooterMode.FullPage
+  mode: PNGScreenshooterMode.FullPage,
 }
 
 export default class PNGScreenshooter implements Screenshooter {
-  constructor(private options: PNGScreenshooterOptions = DEFAULT_OPTIONS){}
+  constructor(private options: PNGScreenshooterOptions = DEFAULT_OPTIONS) {}
 
-  private async takeShotVisibleArea(page: Page, path: string): Promise<any>{
+  private async takeShotVisibleArea(page: Page, path: string): Promise<any> {
     const params: BinaryScreenShotOptions = {
       path,
       type: 'png',
@@ -31,7 +31,7 @@ export default class PNGScreenshooter implements Screenshooter {
     await this.takeShotWithParams(page, params)
   }
 
-  private async takeShotEntirePage(page: Page, path: string): Promise<any>{
+  private async takeShotEntirePage(page: Page, path: string): Promise<any> {
     const params: BinaryScreenShotOptions = {
       path,
       type: 'png',
@@ -40,24 +40,27 @@ export default class PNGScreenshooter implements Screenshooter {
     await this.takeShotWithParams(page, params)
   }
 
-  private async takeShotWithParams(page: Page, params: BinaryScreenShotOptions):Promise<any>{
+  private async takeShotWithParams(
+    page: Page,
+    params: BinaryScreenShotOptions,
+  ): Promise<any> {
     await page.screenshot(params)
   }
 
   private async takeShotFullSplitPage(page: Page, name: string) {
     const innerHeight = await page.evaluate(() => {
       return window.innerHeight
-    });
+    })
     // console.log('innerHeight', innerHeight);
 
     const windowHeight = await page.evaluate(() => {
       return document.body.scrollHeight
-    });
+    })
     // console.log('windowHeight', windowHeight);
 
     let heightOffset = 0
     let screenshotNumber = 0
-    while(heightOffset < windowHeight) {
+    while (heightOffset < windowHeight) {
       const params: BinaryScreenShotOptions = {
         path: `${name}-${screenshotNumber}.png`,
         type: 'png',
@@ -70,7 +73,7 @@ export default class PNGScreenshooter implements Screenshooter {
 
       await page.evaluate((_heightOffset) => {
         return window.scrollTo(0, _heightOffset)
-      }, heightOffset);
+      }, heightOffset)
     }
   }
 
