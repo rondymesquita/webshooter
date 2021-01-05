@@ -24,7 +24,7 @@ webshooter --format PNG --url https://pt.wikipedia.org/wiki/Lorem_ipsum --name l
 webshooter --format PNG --url https://pt.wikipedia.org/wiki/Lorem_ipsum --name lorem-ipsum --mode FullPage
 
 # The entire page but sliced into separated images with same size
-`webshooter --format PNG --url https://pt.wikipedia.org/wiki/Lorem_ipsum --name lorem-ipsum --mode FullSplitPage
+webshooter --format PNG --url https://pt.wikipedia.org/wiki/Lorem_ipsum --name lorem-ipsum --mode FullSplitPage
 ```
 
 ### Take PDF screenshot
