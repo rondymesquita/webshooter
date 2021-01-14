@@ -44,6 +44,7 @@ export default class PNGScreenshooter implements Screenshooter {
     page: Page,
     params: BinaryScreenShotOptions,
   ): Promise<any> {
+    logger.log('Snapshoting with params %o', params)
     await page.screenshot(params)
   }
 
@@ -51,12 +52,10 @@ export default class PNGScreenshooter implements Screenshooter {
     const innerHeight = await page.evaluate(() => {
       return window.innerHeight
     })
-    // console.log('innerHeight', innerHeight);
 
     const windowHeight = await page.evaluate(() => {
       return document.body.scrollHeight
     })
-    // console.log('windowHeight', windowHeight);
 
     let heightOffset = 0
     let screenshotNumber = 0

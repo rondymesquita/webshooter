@@ -1,8 +1,8 @@
-import PDFScreenshooter, { PDFScreenshooterOptions } from './pdf-screenshooter'
+import PDFScreenshooter, { PDFScreenshooterOptions } from './pdfScreenshooter'
 import PNGScreenshooter, {
   PNGScreenshooterOptions,
   PNGScreenshooterMode,
-} from './png-screenshooter'
+} from './pngScreenshooter'
 import { PaperSize } from '../papersize/papersize'
 import { Orientation } from '../papersize/orientation'
 import { Arguments } from '../args/types'
