@@ -93,9 +93,6 @@ export default class PNGScreenshooter implements Screenshooter {
       await this.takeShotFullSplitPage(page, name)
     }
 
-    // logger.log('Snapshoting with params %o', params)
-
-    // await page.screenshot(params)
     logger.log('Image snapshot completed!')
   }
 }
